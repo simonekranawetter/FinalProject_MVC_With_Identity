@@ -1,4 +1,5 @@
 using FinalProject_MVC_With_Identity;
+using FinalProject_MVC_With_Identity.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("Sql")));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(x => x.User.RequireUniqueEmail =true).AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, UserClaims>();
 
 var app = builder.Build();
 
