@@ -1,0 +1,15 @@
+﻿@model FinalProject_MVC_With_Identity.Models.UserProfile
+<div class="bg-blue">
+    <div class="container">
+        <!--header-->
+        <partial name = "_HeaderPartial" />
+        <section id="page-title">
+            <div class="content">
+               <div class="container mt-5">
+                    <h3>@Model.FirstName @Model.LastName</h3>
+                    <p>@Model.Email</p>
+                </div> 
+            </div>
+        </section>
+    </div>
+</div>

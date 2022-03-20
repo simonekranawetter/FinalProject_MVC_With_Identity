@@ -1,8 +1,113 @@
-﻿@{
+﻿@*@model BookAMeetingViewModel*@
+@{
     ViewData["Title"] = "Home Page";
 }
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+   <div class="bg-blue">
+       <div class="container">
+           <!--header-->
+        <partial name = "_HeaderPartial" />
+           <!--showcase-->
+           <section id="showcase">
+               <div class="column">
+                   <div class="content">
+                       <p>Promote any product, service or online course.</p>
+                       <h1>Get Every IT Service Here</h1>
+                       <div class="items">
+                           <div class="item">
+                                <img src="images/red-circle.svg" alt="red circle">
+                                <span>IT Products</span>   
+                           </div>
+                           <div class="item">
+                                <img src="images/blue-circle.svg" alt="blue circle">
+                                <span>IT Services</span>   
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               <div class="column">
+                   <img class="showcase-image" src="images/person-male.svg" alt="male person outline">
+               </div>
+           </section>
+        </div>
+   </div>
+        <!--about us-->
+        <section id="about-us">
+            <div id="about-grid">
+                <div class="column">
+                    <div class="about-pic">
+                        <img src="/images/gray-triangle-rectangle.svg" alt="gray triangle with rectangle overlay">                        </div>
+                    </div>
+                <div class="column">
+                    <div class="about-item">
+                        <h3>About us ____</h3>
+                        <h2>You can't use up creativity.</h2>
+                        <p>Does any industry face a more complex audience journey and marketing sales process than B2B technology? Consider the number of people who influence a sale, the length of the decision-making cycle, the competing interests of the people who purchase, implement, manage, and use the technology. It’s a lot meaningful content here.</p>
+                    </div>
+                    <div class="about-item">
+                        <div class="lower-item">
+                            <div class="numbers">
+                                <p class="number">15</p>
+                                <p class="number-text">Years of Experience</p>
+                            </div>
+                            <div class="buttons">
+                                <a href="#" class="btn btn-main">Learn More</a>
+                                <a href="#" class="btn btn-disabled">Intro Video</a>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--intro-->
+        <section id="intro">
+            <div class="intro-grid">
+                <div class="column">
+                    <div class="intro-item">
+                        <h3>Intro ____</h3>
+                        <h2>How we grow our business.</h2>
+                        <h4>The introduction of cloud and mobile technologies into enterprise software</h4>
+                        <p>hether you are building an enterprise web portal or a state-of-the-art website, you always need the right modern tools. Well-built and maintained .NET frameworks provide those tools in abundance, allowing maintained .NET frameworks provide those tools in abundance, allowing developers to save time, re-use code, and streamline the back end. As software development tools continuously.</p>
+                        <a href="#" class="btn btn-main">Learn More</a>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="intro-pic">
+                        <img src="/images/blue-squares.svg" alt="blue squares">
+                    </div>
+                </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+            </div>
+        </section>
+        <!--book meeting-->
+        <section id="meeting">
+            <div class="container">
+                <h2>Book a Meeting</h2>
+                <p>Does any industryface a more complex audiaence journey and marketing sales process than B2B technology.</p>
+                <div class="row g-3">
+@*                    <form method="post" id="meeting-form" class="col-12">
+                        <div class="row g-3">
+                            <div class="col-6 mb-3">
+                                <input asp-for="Name" type="text" class="form-control" placeholder="Enter your Name">
+                                <span asp-validation-for="Name" class="error"></span>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <input asp-for="Email" type="text" class="form-control" placeholder="Enter your Email">
+                                <span asp-validation-for="Email" class="error"></span>
+                            </div>
+                            <div class="col-12 mb-5">
+                                <textarea asp-for="Questions" rows="4" class="form-control" placeholder="Enter your questions & subject here!"></textarea>
+                                <span asp-validation-for="Questions" class="error"></span>
+                            </div>
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-main">Book a Meeting Now</button>  
+                            </div>
+                            <div asp-validation-summary="ModelOnly" class="error"></div>
+                            <div>@ViewBag.UserMessage</div>
+                        </div>
+                    </form>*@
+                </div>
+            </div>
+        </section >

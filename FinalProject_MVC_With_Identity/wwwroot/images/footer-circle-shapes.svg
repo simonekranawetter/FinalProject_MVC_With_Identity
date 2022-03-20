@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2057" height="750" viewBox="0 0 2057 750">
+  <g id="Group_19" data-name="Group 19" transform="translate(379 -8364)">
+    <circle id="bg" cx="53" cy="53" r="53" transform="translate(1572 8560)" fill="#006de8"/>
+    <circle id="bg-2" data-name="bg" cx="16.5" cy="16.5" r="16.5" transform="translate(1548 8536)" fill="#00e8cf"/>
+    <path id="bg-3" data-name="bg" d="M375,0C582.107,0,750,167.893,750,375S582.107,750,375,750,0,582.107,0,375,167.893,0,375,0Z" transform="translate(-379 8364)" fill="#006de8" opacity="0.8"/>
+  </g>
+</svg>

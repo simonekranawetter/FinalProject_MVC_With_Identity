@@ -1,3 +1,10 @@
 ﻿@using FinalProject_MVC_With_Identity
 @using FinalProject_MVC_With_Identity.Models
+@using FinalProject_MVC_With_Identity.Services
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject IProfileManager Profilemanager
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

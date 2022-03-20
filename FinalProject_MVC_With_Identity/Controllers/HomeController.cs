@@ -17,12 +17,17 @@ namespace FinalProject_MVC_With_Identity.Controllers
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        [HttpGet("services")]
+        public IActionResult Services()
         {
             return View();
         }
 
+        [HttpGet("contact")]
+        public IActionResult Contact()
+        {
+            return View();
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
