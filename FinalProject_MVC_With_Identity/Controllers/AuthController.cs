@@ -165,5 +165,16 @@ namespace FinalProject_MVC_With_Identity.Controllers
         }
 
         #endregion
+
+        #region Access Denied
+
+        [Route("access-denied")]
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        #endregion
     }
 }
