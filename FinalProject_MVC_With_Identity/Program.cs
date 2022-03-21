@@ -13,6 +13,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(builder.
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(x => x.User.RequireUniqueEmail =true).AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddScoped<IUserClaimsPrincipalFactory<IdentityUser>, UserClaims>();
 builder.Services.AddScoped<IProfileManager, ProfileManager>();
+builder.Services.ConfigureApplicationCookie(x =>
+{
+    x.LoginPath = "/signin";
+    x.AccessDeniedPath = "/access-denied";
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
