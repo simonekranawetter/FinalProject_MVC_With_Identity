@@ -6,12 +6,59 @@
         <section id="page-title">
             <div class="content">
                <div class="container mt-5">
-                    <h3>@Model.FirstName @Model.LastName</h3>
-                    <p>@Model.Email</p>
-                    <p>@Model.StreetName</p>
-                    <p>@Model.PostalCode @Model.City</p>
+                   <div id="sign-up">
+                        <div class="container mt-5">
+                            <h2>Profile Information</h2>
+                            <div class="d-flex justify-content-center">
+                                <div class="col-8">
+                                    <form asp-action="Edit">
+                                        <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcliparts.co%2Fcliparts%2F8iE%2Fb97%2F8iEb97a5T.jpg&f=1&nofb=1" alt="this is a placeholder" />
+                                        <div class="row">
+                                            <div class="col-6 mb-3">
+                                                <label asp-for="FirstName" class="form-label"></label>
+                                                <input asp-for="FirstName" class="form-control" placeholder="Enter your First Name">
+                                                <span asp-validation-for="FirstName" class="form-text text-danger"></span>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <label asp-for="LastName" class="form-label"></label>
+                                                <input asp-for="LastName" class="form-control" placeholder="Enter your Last Name">
+                                                <span asp-validation-for="LastName" class="form-text text-danger"></span>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label asp-for="StreetName" class="form-label"></label>
+                                                <input asp-for="StreetName" class="form-control" placeholder="Enter your Street Name">
+                                                <span for="StreetName" class="form-text text-danger"></span>
+                                            </div>
+                                            <div class="col-4 mb-3">
+                                                <label asp-for="PostalCode" class="form-label"></label>
+                                                <input asp-for="PostalCode" class="form-control" placeholder="Enter your Postal Code">
+                                                <span asp-validation-for="PostalCode" class="form-text text-danger"></span>
+                                            </div>
+                                            <div class="col-8 mb-3">
+                                                <label asp-for="City" class="form-label"></label>
+                                                <input asp-for="City" class="form-control" placeholder="Enter your City">
+                                                <span asp-validation-for="City" class="form-text text-danger"></span>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label asp-for="Email" class="form-label"></label>
+                                                <input asp-for="Email" class="form-control" placeholder="Enter your Email">
+                                                <span asp-validation-for="Email" class="form-text text-danger"></span>
+                                            </div>
+                                            <div class="d-grid mb-3">
+                                                <button type="submit" class="btn btn-primary">Edit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div> 
             </div>
         </section>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
