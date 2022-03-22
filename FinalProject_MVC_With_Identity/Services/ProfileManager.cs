@@ -10,6 +10,7 @@ namespace FinalProject_MVC_With_Identity.Services
         Task<ProfileResult> CreateAsync(IdentityUser user, UserProfile profile);
         Task<UserProfile> ReadAsync(string userId);
         Task<string> DisplayNameAsync(string userId);
+        Task UpdateAsync(UserProfile userProfile);
     }
     public class ProfileManager : IProfileManager
     {
@@ -47,6 +48,7 @@ namespace FinalProject_MVC_With_Identity.Services
             var profileEntity = await _context.Profiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == userId);
             if(profileEntity != null)
             {
+                profile.Id = userId;
                 profile.FirstName = profileEntity.FirstName;
                 profile.LastName = profileEntity.LastName;
                 profile.Email = profileEntity.User.Email;
@@ -60,6 +62,19 @@ namespace FinalProject_MVC_With_Identity.Services
         {
             var result = await ReadAsync(userId);
             return $"{result.FirstName} {result.LastName}";
+        }
+
+        public async Task UpdateAsync(UserProfile userProfile)
+        {
+            var profileEntity = await _context.Profiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == userProfile.Id);
+            profileEntity.FirstName = userProfile.FirstName;
+            profileEntity.LastName = userProfile.LastName;
+            profileEntity.User.Email = userProfile.Email;
+            profileEntity.StreetName = userProfile.StreetName;
+            profileEntity.PostalCode = userProfile.PostalCode;
+            profileEntity.City = userProfile.City;
+
+            await _context.SaveChangesAsync();
         }
     }
 

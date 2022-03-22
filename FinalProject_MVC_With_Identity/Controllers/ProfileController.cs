@@ -1,4 +1,5 @@
-﻿using FinalProject_MVC_With_Identity.Services;
+﻿using FinalProject_MVC_With_Identity.Models;
+using FinalProject_MVC_With_Identity.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +14,18 @@ namespace FinalProject_MVC_With_Identity.Controllers
             _profileManager = profileManager;
         }
         [HttpGet("{id}")]
-        [Route("profile/{id}")]
+        //[Route("profile/{id}")]
         public async Task<IActionResult> Index(string id)
         {
             var profile = await _profileManager.ReadAsync(id);
             return View(profile);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit (UserProfile userprofile)
+        {
+            await _profileManager.UpdateAsync(userprofile);
+            return RedirectToAction("Index", userprofile.Id);
         }
     }
 }
