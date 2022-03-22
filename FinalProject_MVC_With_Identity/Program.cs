@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IMailService, NullMailService>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("Sql")));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(x => x.User.RequireUniqueEmail =true).AddEntityFrameworkStores<ApplicationDbContext>();

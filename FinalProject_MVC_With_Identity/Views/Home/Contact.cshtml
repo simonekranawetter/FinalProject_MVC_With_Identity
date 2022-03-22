@@ -1,4 +1,4 @@
-﻿@*@model ContactViewModel*@
+﻿@model ContactViewModel
 @{
     ViewData["Title"] = "Services";
 }
@@ -26,27 +26,27 @@
             <div class="contact-item">
                 <h3>Get In Touch ____</h3>
                 <h2>Estimate for your projects</h2>
-@*                <form method="post" id="contact-form" class="col-12">
-                    <div class="row g-3">
-                        <div class="col-12 mb-3">
-                            <input asp-for="Name" type="text" class="form-control" placeholder="Enter your Name">
-                            <span asp-validation-for="Name" class="error"></span>
+                  <form method="post" id="contact-form" class="col-12">
+                        <div class="row g-3">
+                            <div class="col-12 mb-3">
+                                <input asp-for="Name" type="text" class="form-control" placeholder="Enter your Name">
+                                <span asp-validation-for="Name" class="error"></span>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <input asp-for="Email" type="text" class="form-control" placeholder="Enter your Email">
+                                <span asp-validation-for="Email" class="error"></span>
+                            </div>
+                            <div class="col-12 mb-5">
+                                <textarea asp-for="Message" rows="4" class="form-control" placeholder="Enter your Message"></textarea>
+                                <span asp-validation-for="Message" class="error"></span>
+                            </div>
+                            <div class="d-flex">
+                                <button type="submit" class="btn btn-main">Submit Now</button>  
+                            </div>
+                            <div asp-validation-summary="ModelOnly" class="error"></div>
+                            <div>@ViewBag.UserMessage</div>
                         </div>
-                        <div class="col-12 mb-3">
-                            <input asp-for="Email" type="text" class="form-control" placeholder="Enter your Email">
-                            <span asp-validation-for="Email" class="error"></span>
-                        </div>
-                        <div class="col-12 mb-5">
-                            <textarea asp-for="Message" rows="4" class="form-control" placeholder="Enter your Message"></textarea>
-                            <span asp-validation-for="Message" class="error"></span>
-                        </div>
-                        <div class="d-flex">
-                            <button type="submit" class="btn btn-main">Submit Now</button>  
-                        </div>
-                        <div asp-validation-summary="ModelOnly" class="error"></div>
-                        <div>@ViewBag.UserMessage</div>
-                    </div>
-                </form>*@
+                    </form>
             </div>
         </div>
         <div class="column">

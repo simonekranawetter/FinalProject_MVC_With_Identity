@@ -1,4 +1,4 @@
-﻿@*@model BookAMeetingViewModel*@
+﻿@model BookAMeetingViewModel
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -87,7 +87,7 @@
                 <h2>Book a Meeting</h2>
                 <p>Does any industryface a more complex audiaence journey and marketing sales process than B2B technology.</p>
                 <div class="row g-3">
-@*                    <form method="post" id="meeting-form" class="col-12">
+                    <form method="post" id="meeting-form" class="col-12">
                         <div class="row g-3">
                             <div class="col-6 mb-3">
                                 <input asp-for="Name" type="text" class="form-control" placeholder="Enter your Name">
@@ -107,7 +107,7 @@
                             <div asp-validation-summary="ModelOnly" class="error"></div>
                             <div>@ViewBag.UserMessage</div>
                         </div>
-                    </form>*@
+                    </form>
                 </div>
             </div>
         </section >
