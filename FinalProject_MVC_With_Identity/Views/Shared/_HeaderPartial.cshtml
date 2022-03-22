@@ -1,5 +1,7 @@
 ﻿@using FinalProject_MVC_With_Identity.Services
 @using Microsoft.AspNetCore.Identity
+@inject IProfileManager _profileManager
+
 <div class="header-grid">
     <div id="logo">
         <h1>OmniVus.</h1>
@@ -8,7 +10,7 @@
     <nav id="top-menu">
         @if (SignInManager.IsSignedIn(User))
         {
-            <a asp-controller="Profile" asp-action="Index" asp-route-id="@User.FindFirst("UserId").Value">@*@await ProfileManager.DisplayNameAsync(User.FindFirst("UserId").Value)*@ Hi mom!</a>
+            <a asp-controller="Profile" asp-action="Index" asp-route-id="@User.FindFirst("UserId").Value">@await _profileManager.DisplayNameAsync(User.FindFirst("UserId").Value)</a>
             <div class="social">
                 @if (User.IsInRole("admin"))
                 {
