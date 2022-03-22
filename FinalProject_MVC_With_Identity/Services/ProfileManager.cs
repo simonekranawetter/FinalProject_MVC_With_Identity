@@ -61,7 +61,6 @@ namespace FinalProject_MVC_With_Identity.Services
             var result = await ReadAsync(userId);
             return $"{result.FirstName} {result.LastName}";
         }
-
     }
 
 
