@@ -11,9 +11,13 @@
                             <h2>Profile Information</h2>
                             <div class="d-flex justify-content-center">
                                 <div class="col-8">
-                                    <form asp-action="Edit">
+                                    <form asp-action="Index" enctype="multipart/form-data">
                                         <input asp-for="Id" type="hidden"/>
-                                        <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcliparts.co%2Fcliparts%2F8iE%2Fb97%2F8iEb97a5T.jpg&f=1&nofb=1" alt="this is a placeholder" />
+                                        <img src="@Model.ProfileImageUrl" />
+                                        <div class="form-group col-12">
+                                            <label asp-for="File" class="control-label">Picture</label>
+                                            <input asp-for="File" class="form-control" />
+                                        </div>
                                         <div class="row">
                                             <div class="col-6 mb-3">
                                                 <label asp-for="FirstName" class="form-label"></label>

@@ -32,6 +32,7 @@ namespace FinalProject_MVC_With_Identity.Services
                     StreetName = profile.StreetName,
                     PostalCode = profile.PostalCode,
                     City = profile.City,
+                    ProfileImage = profile.ProfileImageUrl,
                     UserId = user.Id
                 };
                 
@@ -55,6 +56,7 @@ namespace FinalProject_MVC_With_Identity.Services
                 profile.StreetName = profileEntity.StreetName;
                 profile.PostalCode = profileEntity.PostalCode;
                 profile.City = profileEntity.City;
+                profile.ProfileImageUrl = profileEntity.ProfileImage;
             }
             return profile;
         }
@@ -73,6 +75,7 @@ namespace FinalProject_MVC_With_Identity.Services
             profileEntity.StreetName = userProfile.StreetName;
             profileEntity.PostalCode = userProfile.PostalCode;
             profileEntity.City = userProfile.City;
+            profileEntity.ProfileImage = userProfile.ProfileImageUrl;
 
             await _context.SaveChangesAsync();
         }
