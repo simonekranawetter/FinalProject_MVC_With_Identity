@@ -32,14 +32,14 @@ namespace FinalProject_MVC_With_Identity.Controllers
             var id = userProfile.Id;
             var profile = await _profileManager.ReadAsync(id);
 
-            if(profile.File is not null)
+            if(userProfile.File is not null)
             {
                 string wwwrootPath = _host.WebRootPath;
-                string fileName = $"{Path.GetFileNameWithoutExtension(profile.File.FileName)}_{Guid.NewGuid()}{Path.GetExtension(profile.File.FileName)}";
+                string fileName = $"{Path.GetFileNameWithoutExtension(userProfile.File.FileName)}_{Guid.NewGuid()}{Path.GetExtension(userProfile.File.FileName)}";
                 string imageurl = $"images/users/{fileName}";
                 string filePath = Path.Combine($"{wwwrootPath}/images/users", fileName);
 
-                if(profile.ProfileImageUrl is not null)
+                if (profile.ProfileImageUrl is not null)
                 {
                     string oldProfileImagePath = Path.Combine(wwwrootPath, profile.ProfileImageUrl);
 
@@ -48,16 +48,17 @@ namespace FinalProject_MVC_With_Identity.Controllers
                         System.IO.File.Delete(oldProfileImagePath);
                     }
 
-                    using (var fs = new FileStream(filePath, FileMode.Create))
-                    {
-                        await profile.File.CopyToAsync(fs);
-                    }
-                    userProfile.ProfileImageUrl = imageurl;
-                    profile.ProfileImageUrl = imageurl;
-                    
-                    await _profileManager.UpdateAsync(userProfile);
-
                 }
+                using (var fs = new FileStream(filePath, FileMode.Create))
+                {
+                    await userProfile.File.CopyToAsync(fs);
+                }
+                userProfile.ProfileImageUrl = imageurl;
+                profile.ProfileImageUrl = imageurl;
+                    
+                await _profileManager.UpdateAsync(userProfile);
+
+                
             }
 
             return View(profile);
