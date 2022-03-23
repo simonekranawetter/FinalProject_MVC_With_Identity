@@ -26,6 +26,9 @@ namespace FinalProject_MVC_With_Identity.Models.Entities
         [Column(TypeName = "nvarchar(50)")]
         public string City { get; set; } = string.Empty;
 
+        [Display(Name ="Upload File")]
+        public string? ProfileImage { get; set; }
+
         public string UserId { get; set; }
         public IdentityUser User { get; set; }
     }
