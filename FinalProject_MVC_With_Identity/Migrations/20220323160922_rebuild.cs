@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FinalProject_MVC_With_Identity.Migrations
 {
-    public partial class init : Migration
+    public partial class rebuild : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -162,10 +162,10 @@ namespace FinalProject_MVC_With_Identity.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(50)", nullable: false),
-                    StreetName = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    PostalCode = table.Column<string>(type: "char(6)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(50)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    StreetName = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    PostalCode = table.Column<string>(type: "char(6)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(50)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -174,7 +174,8 @@ namespace FinalProject_MVC_With_Identity.Migrations
                         name: "FK_Profiles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
