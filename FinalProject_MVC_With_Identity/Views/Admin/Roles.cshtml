@@ -1,0 +1,43 @@
+﻿@model IEnumerable<IdentityRole>
+
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<div class="bg-blue">
+    <div class="container">
+        <!--header-->
+        <partial name = "_HeaderPartial" />
+        <div class="container mt-5">
+            <h1>Users</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Roles
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                                @if(item.Name != "admin")
+                                {
+                                    <a asp-action="EditRole" asp-route-id="@item.Id">Edit</a> <span>|</span>
+                                    <a asp-action="DeleteRole" asp-route-id="@item.Id">Delete</a>
+
+                                }
+                        </td>
+                    </tr>
+            }
+                </tbody>
+            </table>
+            <a asp-action="AddRole">AddRole</a>
+        </div>
+    </div>
+</div>
