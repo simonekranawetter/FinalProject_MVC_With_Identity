@@ -14,7 +14,8 @@
             <div class="social">
                 @if (User.IsInRole("admin"))
                 {
-                  <a asp-controller="Admin" asp-action="Users">Users</a> 
+                    <a asp-controller="Admin" asp-action="Roles">Roles</a>
+                    <a asp-controller="Admin" asp-action="Users">Users</a> 
                 }
                 <a asp-controller="Auth" asp-action="SignOut">Sign Out</a>
             </div>

@@ -28,6 +28,11 @@ namespace FinalProject_MVC_With_Identity.Controllers
         {
             return View(await _context.Profiles.Include(x => x.User).ToListAsync());
         }
+
+        public async Task<IActionResult> Roles()
+        {
+            return View();
+        }
         
         //[HttpGet("Edit/{id}")]
         public async Task<IActionResult> Edit(string id)
