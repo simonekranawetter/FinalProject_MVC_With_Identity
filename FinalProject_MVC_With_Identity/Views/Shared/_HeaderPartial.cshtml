@@ -10,7 +10,7 @@
     <nav id="top-menu">
         @if (SignInManager.IsSignedIn(User))
         {
-            <a asp-controller="Profile" asp-action="Index" asp-route-id="@User.FindFirst("UserId").Value">@await _profileManager.DisplayNameAsync(User.FindFirst("UserId").Value)</a>
+            <a asp-controller="Profile" asp-action="Index" asp-route-id="@User.FindFirst("UserId").Value">@await _profileManager.DisplayNameAsync(User.FindFirst("UserId").Value) ("Hi mom! This needs a role!")</a>
             <div class="social">
                 @if (User.IsInRole("admin"))
                 {

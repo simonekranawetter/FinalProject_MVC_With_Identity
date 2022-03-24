@@ -16,7 +16,7 @@ namespace FinalProject_MVC_With_Identity.Models
         public string ProfileImageUrl { get; set; }
 
         [Display(Name = "Upload File")]
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
         
         public List<SelectListItem> Roles { get; set; }
     }

@@ -31,7 +31,7 @@ namespace FinalProject_MVC_With_Identity.Controllers
             var id = userProfile.Id;
             var profile = await _profileManager.ReadAsync(id);
 
-            if (userProfile.File is not null) // or if it doesn't change. Fix meeeeeee!
+            if (userProfile.File is not null) 
             {
                 string wwwrootPath = _host.WebRootPath;
                 string fileName = $"{Path.GetFileNameWithoutExtension(userProfile.File.FileName)}_{Guid.NewGuid()}{Path.GetExtension(userProfile.File.FileName)}";
@@ -54,7 +54,11 @@ namespace FinalProject_MVC_With_Identity.Controllers
                 }
                 userProfile.ProfileImageUrl = imageurl;
                 profile.ProfileImageUrl = imageurl;
-            }       
+            }
+            else
+            {
+                userProfile.ProfileImageUrl = profile.ProfileImageUrl;
+            }
                
             await _profileManager.UpdateAsync(userProfile);
             return RedirectToAction("Index", userProfile.Id);
