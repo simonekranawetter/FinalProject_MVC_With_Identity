@@ -145,7 +145,7 @@ namespace FinalProject_MVC_With_Identity.Controllers
             }
             userProfile.Roles = selectRoles;
 
-            return View(userProfile);
+            return RedirectToAction("Users");
         }
 
         public async Task <IActionResult> Delete(int id) 
