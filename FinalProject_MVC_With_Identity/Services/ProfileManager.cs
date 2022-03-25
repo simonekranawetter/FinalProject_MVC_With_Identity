@@ -10,6 +10,7 @@ namespace FinalProject_MVC_With_Identity.Services
         Task<ProfileResult> CreateAsync(IdentityUser user, UserProfile profile);
         Task<UserProfile> ReadAsync(string userId);
         Task<string> DisplayNameAsync(string userId);
+        Task<string> DisplayRoleAsync(string userId);
         Task UpdateAsync(UserProfile userProfile);
     }
     public class ProfileManager : IProfileManager
@@ -65,6 +66,11 @@ namespace FinalProject_MVC_With_Identity.Services
             var result = await ReadAsync(userId);
             return $"{result.FirstName} {result.LastName}";
         }
+        public async Task<string> DisplayRoleAsync(string userId)
+        {
+            var result = await ReadAsync(userId);
+            return $"{result.Role}";
+        }
 
         public async Task UpdateAsync(UserProfile userProfile)
         {
@@ -80,6 +86,8 @@ namespace FinalProject_MVC_With_Identity.Services
             await _context.SaveChangesAsync();
         }
     }
+
+
 
 
     public class ProfileResult
