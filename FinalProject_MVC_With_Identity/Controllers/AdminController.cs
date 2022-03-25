@@ -109,11 +109,24 @@ namespace FinalProject_MVC_With_Identity.Controllers
             };
             return View(userProfile);
         }
-//FIX ME!
+        //FIX ME!
         [HttpPost]
         public async Task<IActionResult> Edit(UserProfile userProfile)
         {
-            //Fix meeeeeeeeeh!
+            var profileEntity = await _context.Profiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == userProfile.Id);
+            var role = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Name == userProfile.Role);
+            var editedUserProfile = new UserProfile
+            {
+                Id = profileEntity.Id.ToString(),
+                FirstName = profileEntity.FirstName,
+                LastName = profileEntity.LastName,
+                StreetName = profileEntity.StreetName,
+                PostalCode = profileEntity.PostalCode,
+                City = profileEntity.City,
+                Role = role.ToString(),
+            };
+
+            await _context.SaveChangesAsync();
             return View();
         }
         //Fix meeeeee!
