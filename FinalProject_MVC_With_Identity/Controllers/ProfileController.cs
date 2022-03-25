@@ -18,7 +18,6 @@ namespace FinalProject_MVC_With_Identity.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Route("profile/{id}")]
         public async Task<IActionResult> Index(string id)
         {
             var profile = await _profileManager.ReadAsync(id);

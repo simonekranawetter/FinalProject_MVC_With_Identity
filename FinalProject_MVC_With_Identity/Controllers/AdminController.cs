@@ -130,9 +130,10 @@ namespace FinalProject_MVC_With_Identity.Controllers
             return View();
         }
         //Fix meeeeee!
-        public async Task <IActionResult> Delete(string id)
+        public async Task <IActionResult> Delete(string id) 
         {
-            var profileEntity = await _context.Profiles.FindAsync(id);
+            //var user = await _userManager.GetUserAsync(User);
+            var profileEntity = await _context.Profiles.FindAsync(id); //breaks here every time whyyyyyyyy
             _context.Profiles.Remove(profileEntity);
             await _context.SaveChangesAsync();
             return RedirectToAction("Users");
