@@ -68,6 +68,9 @@ namespace FinalProject_MVC_With_Identity.Services
         }
         public async Task<string> DisplayRoleAsync(string userId)
         {
+            //var rolesForUsers = await _userManager.GetRolesAsync(user);
+            //var role = rolesForUsers.FirstOrDefault();
+            //var roleForUsers = _roleManager.GetRoleNameAsync(userId);
             var result = await ReadAsync(userId);
             return $"{result.Role}";
         }
