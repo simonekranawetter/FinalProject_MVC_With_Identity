@@ -2,24 +2,27 @@
 using FinalProject_MVC_With_Identity.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace FinalProject_MVC_With_Identity.Services
 {
     public interface IProfileManager
     {
         Task<ProfileResult> CreateAsync(IdentityUser user, UserProfile profile);
-        Task<UserProfile> ReadAsync(string userId);
-        Task<string> DisplayNameAsync(string userId);
-        Task<string> DisplayRoleAsync(string userId);
+        Task<UserProfile> ReadAsync(ClaimsPrincipal claimsPrincipal);
+        Task<string> DisplayNameAsync(ClaimsPrincipal claimsPrincipal);
+        Task<string> DisplayRoleAsync(ClaimsPrincipal claimsPrincipal);
         Task UpdateAsync(UserProfile userProfile);
     }
     public class ProfileManager : IProfileManager
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public ProfileManager(ApplicationDbContext context)
+        public ProfileManager(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public async Task<ProfileResult> CreateAsync(IdentityUser user, UserProfile profile)
@@ -44,13 +47,18 @@ namespace FinalProject_MVC_With_Identity.Services
             }
             return new ProfileResult { Succeeded = false };
         }
-        public async Task<UserProfile> ReadAsync(string userId)
+        public async Task<UserProfile> ReadAsync(ClaimsPrincipal claimsPrincipal)
         {
+            var userId = claimsPrincipal.FindFirst("UserId").Value;
+            var user = await _userManager.GetUserAsync(claimsPrincipal);
+            var rolesForUsers = await _userManager.GetRolesAsync(user);
+            var role = rolesForUsers.FirstOrDefault();
+
             var profile = new UserProfile();
             var profileEntity = await _context.Profiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == userId);
             if(profileEntity != null)
             {
-                profile.Id = userId;
+                profile.UserId = userId;
                 profile.FirstName = profileEntity.FirstName;
                 profile.LastName = profileEntity.LastName;
                 profile.Email = profileEntity.User.Email;
@@ -58,26 +66,26 @@ namespace FinalProject_MVC_With_Identity.Services
                 profile.PostalCode = profileEntity.PostalCode;
                 profile.City = profileEntity.City;
                 profile.ProfileImageUrl = profileEntity.ProfileImage;
+                profile.Role = role;
             }
             return profile;
         }
-        public async Task<string> DisplayNameAsync(string userId)
+        public async Task<string> DisplayNameAsync(ClaimsPrincipal claimsPrincipal)
         {
-            var result = await ReadAsync(userId);
+            var userId = claimsPrincipal.FindFirst("UserId").Value;
+            var result = await ReadAsync(claimsPrincipal);
             return $"{result.FirstName} {result.LastName}";
         }
-        public async Task<string> DisplayRoleAsync(string userId)
+        public async Task<string> DisplayRoleAsync(ClaimsPrincipal claimsPrincipal)
         {
-            //var rolesForUsers = await _userManager.GetRolesAsync(user);
-            //var role = rolesForUsers.FirstOrDefault();
-            //var roleForUsers = _roleManager.GetRoleNameAsync(userId);
-            var result = await ReadAsync(userId);
+            var userId = claimsPrincipal.FindFirst("UserId").Value;
+            var result = await ReadAsync(claimsPrincipal);
             return $"{result.Role}";
         }
 
         public async Task UpdateAsync(UserProfile userProfile)
         {
-            var profileEntity = await _context.Profiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == userProfile.Id);
+            var profileEntity = await _context.Profiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == userProfile.UserId);
             profileEntity.FirstName = userProfile.FirstName;
             profileEntity.LastName = userProfile.LastName;
             profileEntity.User.Email = userProfile.Email;

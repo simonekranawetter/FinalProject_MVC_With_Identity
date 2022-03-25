@@ -98,7 +98,7 @@ namespace FinalProject_MVC_With_Identity.Controllers
             var profileEntity = await _context.Profiles.FirstOrDefaultAsync(p => p.Id.ToString() == id);
             var userProfile = new UserProfile
             {
-                Id = id,
+                UserId = profileEntity.UserId,
                 FirstName = profileEntity.FirstName,
                 LastName = profileEntity.LastName,
                 StreetName = profileEntity.StreetName,
@@ -109,33 +109,52 @@ namespace FinalProject_MVC_With_Identity.Controllers
             };
             return View(userProfile);
         }
-        //FIX ME!
+
         [HttpPost]
         public async Task<IActionResult> Edit(UserProfile userProfile)
         {
-            var profileEntity = await _context.Profiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == userProfile.Id);
-            var role = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Name == userProfile.Role);
-            var editedUserProfile = new UserProfile
-            {
-                Id = profileEntity.Id.ToString(),
-                FirstName = profileEntity.FirstName,
-                LastName = profileEntity.LastName,
-                StreetName = profileEntity.StreetName,
-                PostalCode = profileEntity.PostalCode,
-                City = profileEntity.City,
-                Role = role.ToString(),
-            };
+            var profileEntity = await _context.Profiles.Include(x => x.User).FirstOrDefaultAsync(x => x.UserId == userProfile.UserId);
+            
+            profileEntity.FirstName = userProfile.FirstName;
+            profileEntity.LastName = userProfile.LastName;
+            profileEntity.StreetName = userProfile.StreetName;
+            profileEntity.PostalCode = userProfile.PostalCode;
+            profileEntity.City = userProfile.City;
 
             await _context.SaveChangesAsync();
-            return View();
+
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userProfile.UserId);
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
+            var allRoles = await _userManager.GetRolesAsync(user);
+            var userRole = allRoles.FirstOrDefault();
+
+            if(user is not null)
+            {
+                await _userManager.RemoveFromRoleAsync(user, userRole);
+            }
+            await _userManager.AddToRoleAsync(user, userProfile.Role);
+
+            var roles = _roleManager.Roles.ToList();
+            List<SelectListItem> selectRoles = new List<SelectListItem>();
+            foreach(var identityRole in roles)
+            {
+                selectRoles.Add(new SelectListItem(identityRole.Name, identityRole.Name));
+            }
+            userProfile.Roles = selectRoles;
+
+            return View(userProfile);
         }
-        //Fix meeeeee!
-        public async Task <IActionResult> Delete(string id) 
+
+        public async Task <IActionResult> Delete(int id) 
         {
-            //var user = await _userManager.GetUserAsync(User);
-            var profileEntity = await _context.Profiles.FindAsync(id); //breaks here every time whyyyyyyyy
-            _context.Profiles.Remove(profileEntity);
+            var profileEntity = await _context.Profiles.Include(p => p.Id == id).FirstOrDefaultAsync(p => p.Id == id); 
             await _context.SaveChangesAsync();
+
+            await _userManager.DeleteAsync(profileEntity.User);
+
             return RedirectToAction("Users");
         }
     }

@@ -17,18 +17,17 @@ namespace FinalProject_MVC_With_Identity.Controllers
             _host = host;
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Index(string id)
+        [HttpGet()]
+        public async Task<IActionResult> Index()
         {
-            var profile = await _profileManager.ReadAsync(id);
+            var profile = await _profileManager.ReadAsync(User);
             return View(profile);
         }
 
         [HttpPost("{id}")]
         public async Task<IActionResult> Index(UserProfile userProfile)
         {
-            var id = userProfile.Id;
-            var profile = await _profileManager.ReadAsync(id);
+            var profile = await _profileManager.ReadAsync(User);
 
             if (userProfile.File is not null) 
             {
@@ -60,14 +59,14 @@ namespace FinalProject_MVC_With_Identity.Controllers
             }
                
             await _profileManager.UpdateAsync(userProfile);
-            return RedirectToAction("Index", userProfile.Id);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit (UserProfile userprofile)
         {
             await _profileManager.UpdateAsync(userprofile);
-            return RedirectToAction("Index", userprofile.Id);
+            return RedirectToAction("Index");
         }
     }
 }

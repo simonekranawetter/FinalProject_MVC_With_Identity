@@ -12,12 +12,12 @@
                             <div class="d-flex justify-content-center">
                                 <div class="col-8">
                                     <form asp-action="Edit" enctype="multipart/form-data">
-                                        <input asp-for="Id" type="hidden"/>
+                                        <input asp-for="UserId" type="hidden"/>
                                         <input asp-for="File" type="hidden">
                                         <div class="row">
                                             <div class="mb-3">
                                                 <label asp-for="Role" class="form-label"></label>
-                                                <select asp-for="Role" aps-items="Model.Roles" class="form-control" ></select>
+                                                <select asp-for="Role" asp-items="Model.Roles" class="form-control"></select>
                                             </div>
                                             <div class="col-6 mb-3">
                                                 <label asp-for="FirstName" class="form-label"></label>
