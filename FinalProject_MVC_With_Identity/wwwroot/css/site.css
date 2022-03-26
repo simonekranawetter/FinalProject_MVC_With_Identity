@@ -542,6 +542,9 @@ a {
             #sign-up .container .d-flex .btn-main, #sign-in .container .d-flex .btn-main {
                 width: auto;
             }
+                #sign-up .container a:hover, #sign-in .container a:hover {
+                    color: #f5faff;
+                }
 
 #page-title {
     display: flex;

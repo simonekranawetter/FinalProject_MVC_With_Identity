@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Sign Up";
 }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 <div id="sign-up">
     <div class="container mt-5">
         <h2>Sign Up</h2>
@@ -23,7 +26,7 @@
                         <div class="mb-3">
                             <label asp-for="StreetName" class="form-label"></label>
                             <input asp-for="StreetName" class="form-control" placeholder="Enter your Street Name">
-                            <span for="StreetName" class="form-text text-danger"></span>
+                            <span asp-validation-for="StreetName" class="form-text text-danger"></span>
                         </div>
                         <div class="col-4 mb-3">
                             <label asp-for="PostalCode" class="form-label"></label>
@@ -66,6 +69,4 @@
     </div>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
