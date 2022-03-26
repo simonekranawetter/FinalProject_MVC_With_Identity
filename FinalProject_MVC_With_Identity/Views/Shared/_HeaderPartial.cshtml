@@ -1,6 +1,7 @@
 ﻿@using FinalProject_MVC_With_Identity.Services
 @using Microsoft.AspNetCore.Identity
 @inject IProfileManager _profileManager
+@inject SignInManager<IdentityUser> _signInManager
 
 <div class="header-grid">
     <div id="logo">
@@ -8,7 +9,7 @@
         <p>IT Service & Technology</p>
     </div>
     <nav id="top-menu">
-        @if (SignInManager.IsSignedIn(User))
+        @if (_signInManager.IsSignedIn(User))
         {
             <a asp-controller="Profile" asp-action="Index">@await _profileManager.DisplayNameAsync(User) (@await _profileManager.DisplayRoleAsync(User))</a>
             <div class="social">
@@ -38,7 +39,7 @@
             <a asp-controller="Home" asp-action="Services">Services</a>
             <a asp-controller="Home" asp-action="Contact">Contact</a>
         </div>
-        @if (!SignInManager.IsSignedIn(User))
+        @if (!_signInManager.IsSignedIn(User))
         {
            <a asp-controller="Auth" asp-action="SignIn" class="btn btn-main">Sign In</a> 
         }
